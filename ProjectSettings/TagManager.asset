@@ -8,6 +8,9 @@ TagManager:
   - Did
   - Do
   - Respondido
+  - Anchor
+  - Errado
+  - Certo
   layers:
   - Default
   - TransparentFX
