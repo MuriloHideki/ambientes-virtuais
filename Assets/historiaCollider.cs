@@ -19,12 +19,12 @@ public class JogoController : MonoBehaviour
         public List<Resposta> respostas;
     }
 
-    public GameObject objetoPrefab; // Referência ao prefab do objeto
-    public List<GameObject> colunasDeRespostas; // Lista de objetos de referência
-    public float alturaDeSpawn = 1.0f; // Altura acima do objeto de referência para o spawn
+    public GameObject objetoPrefab;
+    public List<GameObject> colunasDeRespostas;
+    public float alturaDeSpawn = 1.0f;
 
-    public TextMeshPro perguntaTMP; // Referência ao componente TextMeshPro para a pergunta
-    public GameObject objetoReferenciaSpawn; // Objeto de referência para determinar a posição de spawn
+    public TextMeshPro perguntaTMP;
+    public GameObject objetoReferenciaSpawn;
 
     public List<PerguntaResposta> perguntasRespostas; // Lista de perguntas e respostas
     // Start is called before the first frame update
@@ -55,11 +55,8 @@ public class JogoController : MonoBehaviour
             if (objetoReferenciaSpawn != null)
             {
                 Vector3 posicaoDeSpawn = objetoReferenciaSpawn.transform.position + Vector3.up * alturaDeSpawn;
-
                 GameObject novoObjeto = Instantiate(objetoPrefab, posicaoDeSpawn, Quaternion.identity);
-
                 AtivarScripts(novoObjeto);
-
                 ProximaPergunta();
             }
             else
@@ -92,26 +89,19 @@ public class JogoController : MonoBehaviour
     {
         Debug.Log("Atualizando a UI");
 
-        // Verifica se há perguntas disponíveis
         if (GlobalVariables.indicePerguntaAtual < perguntasRespostas.Count)
         {
-            // Atualiza o texto da pergunta
             if (perguntaTMP != null)
             {
                 perguntaTMP.text = perguntasRespostas[GlobalVariables.indicePerguntaAtual].pergunta;
             }
-
-            // Atualiza os textos das respostas nos quadrados
             for (int i = 0; i < colunasDeRespostas.Count; i++)
             {
                 TextMeshPro textoResposta = colunasDeRespostas[i].GetComponentInChildren<TextMeshPro>();
 
-                // Verifica se há respostas suficientes
                 if (i < perguntasRespostas[GlobalVariables.indicePerguntaAtual].respostas.Count && textoResposta != null)
                 {
                     textoResposta.text = perguntasRespostas[GlobalVariables.indicePerguntaAtual].respostas[i].texto;
-
-                    // Define a tag da colunaDeRespostas com base no valor de certa
                     if (perguntasRespostas[GlobalVariables.indicePerguntaAtual].respostas[i].certa)
                     {
                         colunasDeRespostas[i].tag = "Certo";
@@ -134,7 +124,7 @@ public class JogoController : MonoBehaviour
                 }
                 coluna.tag = "Untagged";
             }
-            perguntaTMP.text = "Parabéns, você acertou " + GlobalVariables.acertosHistoria+"/"+perguntasRespostas.Count;
+            perguntaTMP.text = "Parabéns, você acertou " + GlobalVariables.acertosHistoria + "/" + perguntasRespostas.Count;
         }
     }
 }
