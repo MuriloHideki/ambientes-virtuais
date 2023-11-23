@@ -37,7 +37,7 @@ public class RespostaCollider : MonoBehaviour
 
     void GrudaNaPosicaoCentro(GameObject objeto)
     {
-        Quaternion rotacaoFixa = Quaternion.Euler(0f, 0f, 0f);
+        Quaternion rotacaoFixa = Quaternion.Euler(0f, 90f, 0f);
         transform.rotation = rotacaoFixa;
         Vector3 posicaoCentro = objeto.transform.position;
         transform.position = posicaoCentro;
